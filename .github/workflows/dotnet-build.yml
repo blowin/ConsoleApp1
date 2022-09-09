@@ -1,0 +1,37 @@
+name: build
+
+on:
+  push:    
+    paths-ignore:
+    - 'ConsoleApp1.SomePath/**'
+    - 'README.md'
+    
+  pull_request:    
+    paths-ignore:
+    - 'ConsoleApp1.SomePath/**'
+    - 'README.md'
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+        fetch-depth: 0
+        
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore "ConsoleApp1"
+      
+    - name: Build
+      run: dotnet build "ConsoleApp1" --no-restore
+
+    - name: Test
+      run: dotnet test "ConsoleApp1.Tests" --no-restore --verbosity normal
