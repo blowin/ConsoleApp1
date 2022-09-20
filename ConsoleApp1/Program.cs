@@ -1,9 +1,13 @@
-// See https://aka.ms/new-console-template for more information
+#pragma warning disable SA1600 // ElementsMustBeDocumented
 
-class Program
+namespace ConsoleApp1;
+
+public class Program
 {
     public static void Main(string[] args)
     {
         Console.WriteLine("Hello, World!");
     }
 }
+
+#pragma warning restore SA1600 // ElementsMustBeDocumented
